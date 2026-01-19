@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciojtjva58l5w"]
+
+[ext_resource type="Script" uid="uid://dlsri3822nsff" path="res://ball.gd" id="1_gk6bx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pa54t"]
+size = Vector2(16, 16)
+
+[node name="Ball" type="Area2D"]
+script = ExtResource("1_gk6bx")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 16, 0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_pa54t")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

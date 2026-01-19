@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv1uuf8ekm2l5"]
+
+[ext_resource type="Script" uid="uid://bc2qb1b8fvnln" path="res://main.gd" id="1_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cp7cemqps3w22" path="res://Paddle.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b000ppvtbarq2" path="res://Player_Paddle.gd" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://blu6kkdqdcpar" path="res://Goal.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://4hmyhosnyg7" path="res://AI_Paddle.gd" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://ccroatmy5mhgu" path="res://button.gd" id="8_kek77"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_5vw27")
+
+[node name="Player_Paddle" parent="." instance=ExtResource("1_ig7tw")]
+script = ExtResource("2_1bvp3")
+
+[node name="AI_Paddle" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(760, 0)
+script = ExtResource("3_lquwl")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 384.0
+offset_right = 392.0
+offset_bottom = 448.0
+color = Color(0.5496513, 0.10407769, 0.42222446, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 776.0
+offset_bottom = 448.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player_Goal" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-16, 0)
+
+[node name="AI_Goal" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(768, 0)
+
+[node name="Panel" type="Panel" parent="."]
+z_index = -1
+offset_left = 192.0
+offset_top = 136.0
+offset_right = 576.0
+offset_bottom = 312.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 63.0
+text = "Player"
+
+[node name="PlayerScore" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 64.0
+offset_bottom = 127.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 40.0
+offset_right = 376.0
+offset_bottom = 63.0
+text = "Robot"
+horizontal_alignment = 2
+
+[node name="AIScore" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 104.0
+offset_right = 376.0
+offset_bottom = 127.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 328.0
+offset_top = 464.0
+offset_right = 504.0
+offset_bottom = 520.0
+text = "RESET"
+script = ExtResource("8_kek77")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

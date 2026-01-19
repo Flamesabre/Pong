@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv1uuf8ekm2l5"]
+
+[ext_resource type="Script" uid="uid://bc2qb1b8fvnln" path="res://main.gd" id="1_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cp7cemqps3w22" path="res://Paddle.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b000ppvtbarq2" path="res://Player_Paddle.gd" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://blu6kkdqdcpar" path="res://Goal.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://4hmyhosnyg7" path="res://AI_Paddle.gd" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://ccroatmy5mhgu" path="res://button.gd" id="8_kek77"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_5vw27")
+
+[node name="Player_Paddle" parent="." instance=ExtResource("1_ig7tw")]
+script = ExtResource("2_1bvp3")
+
+[node name="AI_Paddle" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(760, 0)
+script = ExtResource("3_lquwl")
+
+[node name="Player_Goal" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-16, 0)
+
+[node name="AI_Goal" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(768, 0)
+
+[node name="UI" type="Panel" parent="."]
+z_index = -1
+offset_left = 192.0
+offset_top = 136.0
+offset_right = 576.0
+offset_bottom = 312.0
+mouse_filter = 2
+
+[node name="Midline" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = -136.0
+offset_right = 200.0
+offset_bottom = 312.0
+mouse_filter = 2
+color = Color(0.8755081, 0.31710023, 0.6985735, 1)
+
+[node name="Midline2" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_left = -192.0
+offset_top = 312.0
+offset_right = 584.0
+offset_bottom = 320.0
+mouse_filter = 2
+color = Color(0.8745098, 0.31764707, 0.69803923, 1)
+
+[node name="Background" type="ColorRect" parent="UI"]
+z_index = -1
+layout_mode = 0
+offset_left = -192.0
+offset_top = -136.0
+offset_right = 584.0
+offset_bottom = 504.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 63.0
+text = "Player"
+
+[node name="PlayerScore" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 64.0
+offset_bottom = 127.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 40.0
+offset_right = 376.0
+offset_bottom = 63.0
+text = "Robot"
+horizontal_alignment = 2
+
+[node name="AIScore" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 104.0
+offset_right = 376.0
+offset_bottom = 127.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 296.0
+offset_top = 464.0
+offset_right = 480.0
+offset_bottom = 520.0
+text = "RESET"
+script = ExtResource("8_kek77")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 776
+limit_bottom = 576
+
+[connection signal="area_entered" from="Player_Paddle/Hitbox" to="Player_Paddle" method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="AI_Paddle/Hitbox" to="AI_Paddle" method="_on_hitbox_area_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+
+[editable path="Player_Paddle"]
+[editable path="AI_Paddle"]

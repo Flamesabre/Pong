@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp7cemqps3w22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjhxm"]
+size = Vector2(16, 128)
+
+[node name="Paddle" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 16.0
+offset_bottom = 128.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(8, 64)
+shape = SubResource("RectangleShape2D_rjhxm")
